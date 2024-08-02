@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum ROLE {
+  LIBRARIAN
+  STUDENT
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  lastName  String
+  email     String   @unique()
+  role      ROLE
+  password  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  loans     Loan[]
+}
+
+model Book {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  title           String
+  publicationDate DateTime
+  isbn            String?  @unique @default(uuid())
+  description     String
+  coverImageUrl   String?
+  stock           Int
+  author          Author   @relation(fields: [authorId], references: [id])
+  authorId        String   @db.ObjectId
+  genresIDs       String[] @db.ObjectId
+  genres          Genre[]  @relation(fields: [genresIDs], references: [id])
+  loans           Loan[]
+}
+
+model Author {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  bio         String?
+  birthdate   DateTime?
+  nationality String?
+  books       Book[]
+}
+
+model Genre {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  booksIDs String[] @db.ObjectId
+  books    Book[]   @relation(fields: [booksIDs], references: [id])
+}
+
+enum LoanState {
+  BORROWED
+  RETURNED
+  OVERDUE
+}
+
+model Loan {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String    @db.ObjectId
+  user       User      @relation(fields: [userId], references: [id])
+  loanState  LoanState
+  bookId     String    @db.ObjectId
+  book       Book      @relation(fields: [bookId], references: [id])
+  borrowedAt DateTime  @default(now())
+  returnedAt DateTime?
+}
