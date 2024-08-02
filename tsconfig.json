@@ -34,7 +34,7 @@
     "paths": {
       "@domain/datasources": ["./src/domain/datasources"],
       "@domain/dtos": ["./src/domain/dtos"],
-      "@domain/entities": ["./src/domain/entites"],
+      "@domain/entities": ["./src/domain/entities"],
       "@domain/repositories": ["./src/domain/repositories"],
       "@domain/use-cases": ["./src/domain/use-cases"],
       "@infraestructure/datasourcesimpl": ["./src/infraestructure/datasources"],
