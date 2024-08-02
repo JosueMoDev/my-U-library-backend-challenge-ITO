@@ -1,0 +1,26 @@
+{
+  "name": "my-u-library-backend-challenge-ito",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/JosueMoDev/my-U-library-backend-challenge-ITO.git",
+  "author": "Jonas Morales <josuemodev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+   "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+   "dev": "tsnd --respawn --clear src/app.ts",
+   "build": "rimraf ./dist && tsc",
+   "start": "yarn run build && node dist/app.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "@types/node": "^22.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "9.x",
+    "globals": "^15.9.0",
+    "rimraf": "^6.0.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.0"
+  }
+}
