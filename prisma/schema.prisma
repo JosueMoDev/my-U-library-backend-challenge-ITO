@@ -34,7 +34,6 @@ model Book {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
   title           String
   publicationDate DateTime
-  isbn            String?  @unique @default(uuid())
   description     String
   coverImageUrl   String?
   stock           Int
@@ -48,9 +47,9 @@ model Book {
 model Author {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
+  lastname    String
   bio         String?
   birthdate   DateTime?
-  nationality String?
   books       Book[]
 }
 
