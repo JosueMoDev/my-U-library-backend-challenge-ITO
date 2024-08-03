@@ -1,6 +1,6 @@
 import { GenreRepository } from "@domain/repositories";
 import { GenreDataSource } from "@domain/datasources";
-import { CreateGenderDto, PatchGenderDto, MongoId, PaginationDto } from "@domain/dtos";
+import { CreateGenderDto, PatchGenderDto, PaginationDto } from "@domain/dtos";
 import { GenreEntenty, PaginationEntity } from "@domain/entities";
 
 export class GenreRepositoryImpl implements GenreRepository {
@@ -11,13 +11,13 @@ export class GenreRepositoryImpl implements GenreRepository {
   async patch(dto: PatchGenderDto): Promise<GenreEntenty> {
     return await this.datasource.patch(dto);
   }
-  async softDelete(id: MongoId): Promise<boolean> {
+  async softDelete(id: string): Promise<boolean> {
     return await this.datasource.softDelete(id);
   }
-  async hardDelete(id: MongoId): Promise<boolean> {
+  async hardDelete(id: string): Promise<boolean> {
     return await this.datasource.hardDelete(id);
   }
-  async findOne(id: MongoId): Promise<GenreEntenty> {
+  async findOne(id: string): Promise<GenreEntenty> {
     return await this.datasource.findOne(id);
   }
   async findMany(

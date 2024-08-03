@@ -2,7 +2,6 @@ import { BookDataSource } from '@domain/datasources';
 import { BookRepository } from '@domain/repositories';
 import {
   CreateBookDto,
-  MongoId,
   PaginationDto,
   PatchBookDto,
 } from '@domain/dtos';
@@ -16,13 +15,13 @@ export class BookRepositoryImpl implements BookRepository {
   async patch(dto: PatchBookDto): Promise<BookEntenty> {
     return await this.datasource.patch(dto);
   }
-  async softDelete(id: MongoId): Promise<boolean> {
+  async softDelete(id: string): Promise<boolean> {
     return await this.datasource.softDelete(id);
   }
-  async hardDelete(id: MongoId): Promise<boolean> {
+  async hardDelete(id: string): Promise<boolean> {
     return await this.datasource.hardDelete(id);
   }
-  async findOne(id: MongoId): Promise<BookEntenty> {
+  async findOne(id: string): Promise<BookEntenty> {
     return await this.datasource.findOne(id);
   }
   async findMany(

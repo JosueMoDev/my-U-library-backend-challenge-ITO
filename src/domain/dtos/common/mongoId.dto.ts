@@ -6,17 +6,14 @@ export class MongoId {
   @IsMongoId()
   public id!: string;
 
-  constructor(args: MongoId) {
-    Object.assign(this, args);
+  constructor(id: string) {
+    this.id = id;
   }
 
-  static validate(object: MongoId): [undefined | string[], MongoId?] {
-    const createDto = new MongoId(object);
-
-    const [errors, dto] = CustomValidatorErrors.validateDto<MongoId>(createDto);
-
+  static validate(_id: string): any {
+    const isMongoId = new MongoId(_id);
+    const [errors, dto] = CustomValidatorErrors.validateDto<MongoId>(isMongoId);
     if (errors) return [errors];
-
-    return [undefined, dto];
+    return [undefined, dto?.id];
   }
 }

@@ -1,27 +1,35 @@
 import { CreateUserDto, PatchUserDto, PaginationDto } from "@domain/dtos";
-import { UserEntity, PaginationEntity } from "@domain/entities";
+import { UserEntity, PaginationEntity, LoanEntity } from "@domain/entities";
 import { UserRopository } from "@domain/repositories";
 
 export class UserService {
   constructor(private readonly repository: UserRopository) {}
-  async create(dto: CreateUserDto): Promise<UserEntity> {
-    return await this.repository.create(dto);
+
+  create(dto: CreateUserDto): Promise<UserEntity> {
+    return  this.repository.create(dto);
   }
-  async patch(dto: PatchUserDto): Promise<UserEntity> {
-    return await this.repository.patch(dto);
+  patch(dto: PatchUserDto): Promise<UserEntity> {
+    return this.repository.patch(dto);
   }
-  async hardDelete(id: string): Promise<boolean> {
-    return await this.repository.hardDelete(id);
+  hardDelete(id: string): Promise<Object> {
+    return  this.repository.hardDelete(id);
   }
-  async SoftDelete(id: string): Promise<boolean> {
-    return await this.repository.SoftDelete(id);
+  SoftDelete(id: string): Promise<Object> {
+    return this.repository.SoftDelete(id);
   }
-  async findOne(id: string): Promise<UserEntity> {
-    return await this.repository.findOne(id);
+  findOne(id: string): Promise<UserEntity> {
+    return this.repository.findOne(id);
   }
-  async findMany(
+  findMany(
     dto: PaginationDto,
-  ): Promise<{ pagination: PaginationEntity; user: UserEntity[] }> {
-    return await this.repository.findMany(dto);
+  ): Promise<{ pagination: PaginationEntity; users: UserEntity[] }> {
+    return this.repository.findMany(dto);
+  }
+
+  getLoanBooks(dto: PaginationDto): Promise<{
+    pagination: PaginationEntity;
+    loans: LoanEntity[];
+  }> {
+   return this.repository.getLoanBooks(dto);
   }
 }

@@ -1,8 +1,8 @@
-import AuthorDataSourceImpl from "@infraestructure/datasourcesimpl";
 import { AuthorRepositoryImpl } from "@infraestructure/repositoriesimpl";
 import { Router } from "express";
 import { AuthorService } from "./author.service";
 import { AuthorController } from "./author.controller";
+import { AuthorDataSourceImpl } from "@infraestructure/datasourcesimpl";
 
 export class AuthorRoutes {
   static get routes(): Router {

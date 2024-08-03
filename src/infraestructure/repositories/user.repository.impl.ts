@@ -1,28 +1,36 @@
 import { UserDataSource } from "@domain/datasources";
 import { UserRopository } from "@domain/repositories";
-import { CreateUserDto, PatchUserDto, MongoId, PaginationDto } from "@domain/dtos";
-import { UserEntity, PaginationEntity } from "@domain/entities";
+import { CreateUserDto, PatchUserDto, PaginationDto } from "@domain/dtos";
+import { UserEntity, PaginationEntity, LoanEntity } from "@domain/entities";
 
 export class UserRepositoryImpl implements UserRopository {
   constructor(private readonly datasource: UserDataSource) {}
-  async create(dto: CreateUserDto): Promise<UserEntity> {
-    return await this.datasource.create(dto);
+
+  create(dto: CreateUserDto): Promise<UserEntity> {
+    return this.datasource.create(dto);
   }
-  async patch(dto: PatchUserDto): Promise<UserEntity> {
-    return await this.datasource.patch(dto);
+  patch(dto: PatchUserDto): Promise<UserEntity> {
+    return this.datasource.patch(dto);
   }
-  async hardDelete(id: string): Promise<boolean> {
-    return await this.datasource.hardDelete(id);
+  hardDelete(id: string): Promise<Object> {
+    return this.datasource.hardDelete(id);
   }
-  async SoftDelete(id: string): Promise<boolean> {
-    return await this.datasource.SoftDelete(id);
+  SoftDelete(id: string): Promise<Object> {
+    return this.datasource.SoftDelete(id);
   }
-  async findOne(id: string): Promise<UserEntity> {
-    return await this.datasource.findOne(id);
+  findOne(id: string): Promise<UserEntity> {
+    return this.datasource.findOne(id);
   }
-  async findMany(
+  findMany(
     dto: PaginationDto,
-  ): Promise<{ pagination: PaginationEntity; user: UserEntity[] }> {
-    return await this.datasource.findMany(dto);
+  ): Promise<{ pagination: PaginationEntity; users: UserEntity[] }> {
+    return this.datasource.findMany(dto);
+  }
+
+  getLoanBooks(dto: PaginationDto): Promise<{
+    pagination: PaginationEntity;
+    loans: LoanEntity[];
+  }> {
+    return this.datasource.getLoanBooks(dto);
   }
 }

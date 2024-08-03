@@ -11,7 +11,7 @@ import { HandlerError } from '@handler-errors';
 export class UserController {
   constructor(private readonly service: UserService) {}
 
-  create= (request: Request, response: Response) => {
+  create = (request: Request, response: Response) => {
     const [error, dto] = CreateUserDto.validate(request.body);
     if (error) return response.status(400).json({ error });
     this.service
@@ -79,6 +79,21 @@ export class UserController {
     if (error) return response.status(400).json({ error });
     this.service
       .findMany(dto!)
+      .then((data) => response.json(data))
+      .catch((error) => {
+        const { statusCode, errorMessage } = HandlerError.hasError(error);
+        return response.status(statusCode).json({ error: errorMessage });
+      });
+  };
+
+  getLoanBooks = (request: Request, response: Response) => {
+    const [error, dto] = PaginationDto.validate(
+      request.body,
+      request.originalUrl,
+    );
+    if (error) return response.status(400).json({ error });
+    this.service
+      .getLoanBooks(dto!)
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);

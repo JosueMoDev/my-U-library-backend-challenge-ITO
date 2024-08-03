@@ -1,8 +1,8 @@
 import { AuthorDataSource } from "@domain/datasources";
-import { CreateAuthorDto, PatchAuthorDto, MongoId, PaginationDto } from "@domain/dtos";
+import { CreateAuthorDto, PatchAuthorDto,  PaginationDto } from "@domain/dtos";
 import { AuthorEntenty, PaginationEntity } from "@domain/entities";
 
-export default class AuthorDataSourceImpl implements AuthorDataSource {
+export class AuthorDataSourceImpl implements AuthorDataSource {
     create(dto: CreateAuthorDto): Promise<AuthorEntenty> {
         throw new Error("Method not implemented.");
     }
