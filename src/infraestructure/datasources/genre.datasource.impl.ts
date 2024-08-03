@@ -9,18 +9,17 @@ export class GenreDataSourceImpl implements GenreDataSource {
     patch(dto: PatchGenderDto): Promise<GenreEntenty> {
         throw new Error("Method not implemented.");
     }
-    softDelete(id: MongoId): Promise<boolean> {
+    softDelete(id: string): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    hardDelete(id: MongoId): Promise<boolean> {
+    hardDelete(id: string): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    findOne(id: MongoId): Promise<GenreEntenty> {
+    findOne(id: string): Promise<GenreEntenty> {
         throw new Error("Method not implemented.");
     }
     findMany(dto: PaginationDto): Promise<{ pagination: PaginationEntity; genres: GenreEntenty[]; }> {
         throw new Error("Method not implemented.");
     }
-
     
 }

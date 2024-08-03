@@ -35,10 +35,10 @@ export class AuthorController {
   };
 
   hardDelete = (request: Request, response: Response) => {
-    const [error, dto] = MongoId.validate(request.params.id as any);
+    const [error, id] = MongoId.validate(request.params.id);
     if (error) return response.status(400).json({ error });
     this.service
-      .hardDelete(dto!)
+      .hardDelete(id!)
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);
@@ -47,10 +47,10 @@ export class AuthorController {
   };
 
   SoftDelete = (request: Request, response: Response) => {
-    const [error, dto] = MongoId.validate(request.params.id as any);
+    const [error, id] = MongoId.validate(request.params.id);
     if (error) return response.status(400).json({ error });
     this.service
-      .softDelete(dto!)
+      .softDelete(id!)
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);
@@ -59,10 +59,10 @@ export class AuthorController {
   };
 
   findOne = (request: Request, response: Response) => {
-    const [error, dto] = MongoId.validate(request.params.id as any);
+    const [error, id] = MongoId.validate(request.params.id);
     if (error) return response.status(400).json({ error });
     this.service
-      .findOne(dto!)
+      .findOne(id!)
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);

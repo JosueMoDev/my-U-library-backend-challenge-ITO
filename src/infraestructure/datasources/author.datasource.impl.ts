@@ -2,24 +2,25 @@ import { AuthorDataSource } from "@domain/datasources";
 import { CreateAuthorDto, PatchAuthorDto, MongoId, PaginationDto } from "@domain/dtos";
 import { AuthorEntenty, PaginationEntity } from "@domain/entities";
 
-export class AuthorDataSourceImpl implements AuthorDataSource {
+export default class AuthorDataSourceImpl implements AuthorDataSource {
     create(dto: CreateAuthorDto): Promise<AuthorEntenty> {
         throw new Error("Method not implemented.");
     }
     patch(dto: PatchAuthorDto): Promise<AuthorEntenty> {
         throw new Error("Method not implemented.");
     }
-    softDelete(id: MongoId): Promise<boolean> {
+    softDelete(id: string): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    hardDelete(id: MongoId): Promise<boolean> {
+    hardDelete(id: string): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    findOne(id: MongoId): Promise<AuthorEntenty> {
+    findOne(id: string): Promise<AuthorEntenty> {
         throw new Error("Method not implemented.");
     }
     findMany(dto: PaginationDto): Promise<{ pagination: PaginationEntity; authors: AuthorEntenty[]; }> {
         throw new Error("Method not implemented.");
     }
+ 
     
 }

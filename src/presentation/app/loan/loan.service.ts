@@ -1,4 +1,4 @@
-import { CreateLoanDto, PatchLoanDto, MongoId, PaginationDto } from "@domain/dtos";
+import { CreateLoanDto, PatchLoanDto, PaginationDto } from "@domain/dtos";
 import { LoanEntity, PaginationEntity } from "@domain/entities";
 import { LoanRepository } from "@domain/repositories";
 
@@ -11,10 +11,10 @@ export class LoanService {
   async patch(dto: PatchLoanDto): Promise<LoanEntity> {
     return await this.repository.patch(dto);
   }
-  async return(id: MongoId): Promise<boolean> {
+  async return(id: string): Promise<boolean> {
     return await this.repository.return(id);
   }
-  async findOne(id: MongoId): Promise<LoanEntity> {
+  async findOne(id: string): Promise<LoanEntity> {
     return await this.repository.findOne(id);
   }
   async findMany(

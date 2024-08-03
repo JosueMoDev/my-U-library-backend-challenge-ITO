@@ -1,4 +1,4 @@
-import { CreateBookDto, PatchBookDto, MongoId, PaginationDto } from "@domain/dtos";
+import { CreateBookDto, PatchBookDto, PaginationDto } from "@domain/dtos";
 import { BookEntenty, PaginationEntity } from "@domain/entities";
 import { BookRepository } from "@domain/repositories";
 
@@ -10,13 +10,13 @@ export class BookService {
   async patch(dto: PatchBookDto): Promise<BookEntenty> {
     return await this.repository.patch(dto);
   }
-  async softDelete(id: MongoId): Promise<boolean> {
+  async softDelete(id: string): Promise<boolean> {
     return await this.repository.softDelete(id);
   }
-  async hardDelete(id: MongoId): Promise<boolean> {
+  async hardDelete(id: string): Promise<boolean> {
     return await this.repository.hardDelete(id);
   }
-  async findOne(id: MongoId): Promise<BookEntenty> {
+  async findOne(id: string): Promise<BookEntenty> {
     return await this.repository.findOne(id);
   }
   async findMany(

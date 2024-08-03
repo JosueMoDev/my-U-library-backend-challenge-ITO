@@ -1,4 +1,4 @@
-import { CreateGenderDto, PatchGenderDto, MongoId, PaginationDto } from "@domain/dtos";
+import { CreateGenderDto, PatchGenderDto, PaginationDto } from "@domain/dtos";
 import { GenreEntenty, PaginationEntity } from "@domain/entities";
 import { GenreRepository } from "@domain/repositories";
 
@@ -10,13 +10,13 @@ export class GenreService {
   async patch(dto: PatchGenderDto): Promise<GenreEntenty> {
     return await this.repository.patch(dto);
   }
-  async softDelete(id: MongoId): Promise<boolean> {
+  async softDelete(id: string): Promise<boolean> {
     return await this.repository.softDelete(id);
   }
-  async hardDelete(id: MongoId): Promise<boolean> {
+  async hardDelete(id: string): Promise<boolean> {
     return await this.repository.hardDelete(id);
   }
-  async findOne(id: MongoId): Promise<GenreEntenty> {
+  async findOne(id: string): Promise<GenreEntenty> {
     return await this.repository.findOne(id);
   }
   async findMany(

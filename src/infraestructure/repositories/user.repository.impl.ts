@@ -11,13 +11,13 @@ export class UserRepositoryImpl implements UserRopository {
   async patch(dto: PatchUserDto): Promise<UserEntity> {
     return await this.datasource.patch(dto);
   }
-  async hardDelete(id: MongoId): Promise<boolean> {
+  async hardDelete(id: string): Promise<boolean> {
     return await this.datasource.hardDelete(id);
   }
-  async SoftDelete(id: MongoId): Promise<boolean> {
+  async SoftDelete(id: string): Promise<boolean> {
     return await this.datasource.SoftDelete(id);
   }
-  async findOne(id: MongoId): Promise<UserEntity> {
+  async findOne(id: string): Promise<UserEntity> {
     return await this.datasource.findOne(id);
   }
   async findMany(

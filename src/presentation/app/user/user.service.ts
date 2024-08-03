@@ -1,4 +1,4 @@
-import { CreateUserDto, PatchUserDto, MongoId, PaginationDto } from "@domain/dtos";
+import { CreateUserDto, PatchUserDto, PaginationDto } from "@domain/dtos";
 import { UserEntity, PaginationEntity } from "@domain/entities";
 import { UserRopository } from "@domain/repositories";
 
@@ -10,13 +10,13 @@ export class UserService {
   async patch(dto: PatchUserDto): Promise<UserEntity> {
     return await this.repository.patch(dto);
   }
-  async hardDelete(id: MongoId): Promise<boolean> {
+  async hardDelete(id: string): Promise<boolean> {
     return await this.repository.hardDelete(id);
   }
-  async SoftDelete(id: MongoId): Promise<boolean> {
+  async SoftDelete(id: string): Promise<boolean> {
     return await this.repository.SoftDelete(id);
   }
-  async findOne(id: MongoId): Promise<UserEntity> {
+  async findOne(id: string): Promise<UserEntity> {
     return await this.repository.findOne(id);
   }
   async findMany(

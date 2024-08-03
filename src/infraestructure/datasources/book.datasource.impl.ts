@@ -9,17 +9,18 @@ export class BookDataSourceImpl implements BookDataSource {
     patch(dto: PatchBookDto): Promise<BookEntenty> {
         throw new Error("Method not implemented.");
     }
-    softDelete(id: MongoId): Promise<boolean> {
+    softDelete(id: string): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    hardDelete(id: MongoId): Promise<boolean> {
+    hardDelete(id: string): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
-    findOne(id: MongoId): Promise<BookEntenty> {
+    findOne(id: string): Promise<BookEntenty> {
         throw new Error("Method not implemented.");
     }
     findMany(dto: PaginationDto): Promise<{ pagination: PaginationEntity; books: BookEntenty[]; }> {
         throw new Error("Method not implemented.");
     }
+ 
     
 }

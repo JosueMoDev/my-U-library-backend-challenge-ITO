@@ -34,10 +34,10 @@ export class LoanController {
       });
   };
   return = (request: Request, response: Response) => {
-    const [error, dto] = MongoId.validate(request.params as any);
+    const [error, id] = MongoId.validate(request.params.id);
     if (error) return response.status(400).json({ error });
     this.service
-      .return(dto!)
+      .return(id!)
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);
@@ -45,10 +45,10 @@ export class LoanController {
       });
   };
   findOne = (request: Request, response: Response) => {
-    const [error, dto] = MongoId.validate(request.params as any);
+    const [error, id] = MongoId.validate(request.params.id);
     if (error) return response.status(400).json({ error });
     this.service
-      .findOne(dto!)
+      .findOne(id!)
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);

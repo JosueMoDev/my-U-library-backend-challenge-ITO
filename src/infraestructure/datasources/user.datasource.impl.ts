@@ -1,27 +1,45 @@
+import { BcryptJsPlugin, prisma } from '@config';
 import { UserDataSource } from '@domain/datasources';
 import {
   CreateUserDto,
   PatchUserDto,
-  MongoId,
   PaginationDto,
 } from '@domain/dtos';
 import { UserEntity, PaginationEntity } from '@domain/entities';
+import { CustomError } from '@handler-errors';
 
 export class UserDataSourceImpl implements UserDataSource {
-  create(dto: CreateUserDto): Promise<UserEntity> {
-    throw new Error('Method not implemented.');
+  async create(dto: CreateUserDto): Promise<UserEntity> {
+     await this.findOne(dto.email);
+
+     try {
+       const hashPassword = BcryptJsPlugin.hashPassword(dto.password);
+       const saveAccount = await prisma.user.create({
+         data: {
+           ...dto,
+           password: hashPassword,
+         }
+       });
+       return UserEntity.fromObject(saveAccount);
+     } catch (error) {
+       throw CustomError.internalServer(`${error}`);
+     }
   }
   patch(dto: PatchUserDto): Promise<UserEntity> {
     throw new Error('Method not implemented.');
   }
-  hardDelete(id: MongoId): Promise<boolean> {
+  hardDelete(id: string): Promise<boolean> {
     throw new Error('Method not implemented.');
   }
-  SoftDelete(id: MongoId): Promise<boolean> {
+  SoftDelete(id: string): Promise<boolean> {
     throw new Error('Method not implemented.');
   }
-  findOne(id: MongoId): Promise<UserEntity> {
-    throw new Error('Method not implemented.');
+  async findOne(id: string): Promise<UserEntity> {
+      const existUser = await prisma.user.findFirst({
+        where: {id},
+      });
+      if (!existUser) throw CustomError.badRequest('Any user was found');
+      return UserEntity.fromObject(existUser);
   }
   findMany(dto: PaginationDto): Promise<{ pagination: PaginationEntity; user: UserEntity[]; }> {
     throw new Error('Method not implemented.');
