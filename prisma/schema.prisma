@@ -39,40 +39,42 @@ model Book {
   stock           Int
   author          Author   @relation(fields: [authorId], references: [id])
   authorId        String   @db.ObjectId
-  genresIDs       String[] @db.ObjectId
-  genres          Genre[]  @relation(fields: [genresIDs], references: [id])
+  genreId         String   @db.ObjectId
+  genre           Genre    @relation(fields: [genreId], references: [id])
   loans           Loan[]
+  isActive  Boolean  @default(true)
 }
 
 model Author {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  lastname    String
-  bio         String?
-  birthdate   DateTime?
-  books       Book[]
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  lastname  String
+  isActive  Boolean   @default(true)
+  bio       String?
+  birthdate DateTime?
+  books     Book[]
+  
 }
 
 model Genre {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  booksIDs String[] @db.ObjectId
-  books    Book[]   @relation(fields: [booksIDs], references: [id])
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  books  Book[]
+  isActive  Boolean  @default(true)
 }
 
 enum LoanState {
   BORROWED
   RETURNED
-  OVERDUE
 }
 
 model Loan {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   userId     String    @db.ObjectId
   user       User      @relation(fields: [userId], references: [id])
-  loanState  LoanState
+  loanState  LoanState @default(BORROWED)
   bookId     String    @db.ObjectId
   book       Book      @relation(fields: [bookId], references: [id])
   borrowedAt DateTime  @default(now())
-  returnedAt DateTime?
+  returnedAt DateTime? @updatedAt()
 }
