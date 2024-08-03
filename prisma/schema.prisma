@@ -50,8 +50,8 @@ model Author {
   name      String
   lastname  String
   isActive  Boolean   @default(true)
-  bio       String?
-  birthdate DateTime?
+  bio       String
+  birthdate DateTime
   books     Book[]
   
 }

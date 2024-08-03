@@ -5,10 +5,10 @@ export class BookEntenty {
   public title: string;
   public publicationDate: Date;
   public description: string;
-  public coverImageUrl?: string;
+  public coverImageUrl?: string | null;
   public stock: number;
   public author: AuthorEntenty;
-  public genres: GenreEntenty[];
+  public genre: Pick<GenreEntenty, 'id' | 'name'>;
   constructor({
     id,
     title,
@@ -17,7 +17,7 @@ export class BookEntenty {
     coverImageUrl,
     stock,
     author,
-    genres,
+    genre,
   }: BookEntenty) {
     this.id = id;
     this.title = title;
@@ -26,7 +26,7 @@ export class BookEntenty {
     this.coverImageUrl = coverImageUrl;
     this.stock = stock;
     this.author = author;
-    this.genres = genres;
+    this.genre = genre;
   }
   static fromObject(book: BookEntenty): BookEntenty {
     return new BookEntenty(book);

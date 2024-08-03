@@ -92,11 +92,39 @@ export class UserDataSourceImpl implements UserDataSource {
     return { pagination, users: userMapped };
   }
 
-  async getLoanBooks(dto: PaginationDto): Promise<{
-    pagination: PaginationEntity;
-    loans: LoanEntity[];
-  }> {
-    throw 'Not Implemented'
+  async getLoanBooks(dto: PaginationDto): Promise<{ pagination: PaginationEntity, loans: LoanEntity[]}> {
+      
+      const { page, pageSize } = dto;
+      const [loans, total] = await Promise.all([
+        prisma.loan.findMany({
+          skip: PaginationEntity.dinamycOffset(page, pageSize),
+          take: pageSize,
+          where: {},
+          include: {
+            user: {
+              select: {
+                name: true,
+                email: true,
+                lastName: true
+              }
+            },
+            book: {
+              select: {
+                title: true,
+                coverImageUrl: true,
+                author: true,
+                genre: true,
+              }
+            },
+          }
+        }),
+        prisma.loan.count({ where: {}}),
+      ]);
+  
+      const pagination = PaginationEntity.setPagination({ ...dto, total });
+      const loansMapped = loans.map((entity) => LoanEntity.fromObject(entity));
+    return { pagination, loans: loansMapped };
+
   }
 
   async #findUserByEmail(email: string): Promise<void> {
