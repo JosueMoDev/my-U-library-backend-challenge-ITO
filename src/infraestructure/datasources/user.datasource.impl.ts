@@ -39,18 +39,26 @@ export class UserDataSourceImpl implements UserDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
+
   async changeRecordStatus(id: string): Promise<any> {
-    const { name } = await this.findOne(id);
+    const { isActive, name } = await this.findOne(id);
     try {
-      await prisma.user.delete({ where: { id } });
+      await prisma.user.update({
+        where: { id },
+        data: {
+          isActive: !isActive,
+        },
+      });
+
       return {
-        message: `User '${name}' deleted successfully`,
+        message: `User '${name}' ${
+          isActive ? 'disabled' : 'enabled'
+        } successfully`,
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
   }
-
   async findOne(id: string): Promise<UserEntity> {
     const existUser = await prisma.user.findFirst({
       where: { id },
