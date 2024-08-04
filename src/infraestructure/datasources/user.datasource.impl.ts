@@ -39,7 +39,7 @@ export class UserDataSourceImpl implements UserDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
-  async hardDelete(id: string): Promise<any> {
+  async changeRecordStatus(id: string): Promise<any> {
     const { name } = await this.findOne(id);
     try {
       await prisma.user.delete({ where: { id } });
@@ -50,25 +50,7 @@ export class UserDataSourceImpl implements UserDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
-  async SoftDelete(id: string): Promise<any> {
-    const { isActive, name } = await this.findOne(id);
-    try {
-      await prisma.user.update({
-        where: { id },
-        data: {
-          isActive: !isActive,
-        },
-      });
 
-      return {
-        message: `User '${name}' ${
-          isActive ? 'disabled' : 'enabled'
-        } successfully`,
-      };
-    } catch (error) {
-      throw CustomError.internalServer(`${error}`);
-    }
-  }
   async findOne(id: string): Promise<UserEntity> {
     const existUser = await prisma.user.findFirst({
       where: { id },

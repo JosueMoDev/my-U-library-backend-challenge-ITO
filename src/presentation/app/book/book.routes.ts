@@ -17,8 +17,8 @@ export class BookRoutes {
     router.patch('/patch', controller.patch);
     router.get('/find-one/:id', controller.findOne);
     router.get('/find-many', controller.findMany);
-    router.patch('/change-status/:id', controller.SoftDelete);
-    router.delete('/delete/:id', controller.hardDelete);
+    router.patch('/change-status/:id', controller.changeRecordStatus);
+    
 
     return router;
   }

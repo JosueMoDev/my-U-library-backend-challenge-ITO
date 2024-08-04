@@ -18,8 +18,8 @@ export class UserRoutes {
     router.get('/find-one/:id', controller.findOne);
     router.get('/find-many', controller.findMany);
     router.get('/loan-books', controller.getLoanBooks);
-    router.patch('/change-status/:id', controller.SoftDelete);
-    router.delete('/delete/:id', controller.hardDelete);
+    router.patch('/change-status/:id', controller.changeRecordStatus);
+    
 
     return router;
   }

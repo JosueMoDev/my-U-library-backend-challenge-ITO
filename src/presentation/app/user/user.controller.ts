@@ -35,27 +35,11 @@ export class UserController {
       });
   };
 
-  hardDelete = (request: Request, response: Response) => {
+  changeRecordStatus = (request: Request, response: Response) => {
     const [error, id] = MongoId.validate(request.params.id);
     if (error) return response.status(400).json({ error });
     this.service
-      .hardDelete(id!)
-      .then((data) => response.json(data))
-      .catch((error) => {
-        const { statusCode, errorMessage } = HandlerError.hasError(error);
-        return response.status(statusCode).json({ error: errorMessage });
-      });
-  };
-
-  SoftDelete = (request: Request, response: Response) => {
-    const [error, id] = MongoId.validate(request.params.id);
-    if (error) return response.status(400).json({ error });
-      const bearerToken = request.headers['authorization'];
-    if (!bearerToken)
-      return response.status(400).json({ error: ' NO token provided' });
-    const token = bearerToken.split(' ');
-    this.service
-      .SoftDelete(id!)
+      .changeRecordStatus(id!)
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);

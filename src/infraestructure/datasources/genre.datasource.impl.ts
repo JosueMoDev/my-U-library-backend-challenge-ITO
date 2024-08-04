@@ -28,7 +28,7 @@ export class GenreDataSourceImpl implements GenreDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
-  async softDelete(id: string): Promise<Object> {
+  async changeRecordStatus(id: string): Promise<Object> {
     try {
       const { name, isActive } = await this.findOne(id);
       await prisma.genre.update({
@@ -46,15 +46,7 @@ export class GenreDataSourceImpl implements GenreDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
-  async hardDelete(id: string): Promise<Object> {
-    try {
-      const { name } = await this.findOne(id);
-      await prisma.genre.delete({ where: { id } });
-      return { message: `The genre ${name} was deleted successfully` };
-    } catch (error) {
-      throw CustomError.internalServer(`${error}`);
-    }
-  }
+
   async findOne(id: string): Promise<GenreEntenty> {
     try {
       const genre = await prisma.genre.findFirst({ where: { id } });

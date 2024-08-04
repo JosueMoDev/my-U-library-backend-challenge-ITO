@@ -29,7 +29,8 @@ export class AuthorDataSourceImpl implements AuthorDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
-  async softDelete(id: string): Promise<Object> {
+
+  async changeRecordStatus(id: string): Promise<Object> {
     const { isActive, name, lastName } = await this.findOne(id);
     try {
       await prisma.author.update({
@@ -45,15 +46,7 @@ export class AuthorDataSourceImpl implements AuthorDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
-  async hardDelete(id: string): Promise<Object> {
-    const { name, lastName } = await this.findOne(id);
-    try {
-      await prisma.author.delete({ where: { id } });
-      return { message: `The Author ${name} ${lastName} deleted successfully` };
-    } catch (error) {
-      throw CustomError.internalServer(`${error}`);
-    }
-  }
+
   async findOne(id: string): Promise<AuthorEntenty> {
     try {
       const author = await prisma.author.findUnique({ where: { id } });

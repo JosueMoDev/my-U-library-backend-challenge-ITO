@@ -22,7 +22,7 @@ export class BookDataSourceImpl implements BookDataSource {
     try {
       const book = await prisma.book.create({
         data: dto,
-        include: this.includes
+        include: this.includes,
       });
       return BookEntenty.fromObject(book);
     } catch (error) {
@@ -45,7 +45,7 @@ export class BookDataSourceImpl implements BookDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
-  async softDelete(id: string): Promise<Object> {
+  async changeRecordStatus(id: string): Promise<Object> {
     const { isActive, title } = await this.findOne(id);
     try {
       await prisma.book.update({
@@ -61,17 +61,7 @@ export class BookDataSourceImpl implements BookDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
-  async hardDelete(id: string): Promise<Object> {
-    const { title } = await this.findOne(id);
-    try {
-      await prisma.author.delete({ where: { id } });
-      return {
-        message: `The Book ${title} deleted successfully`,
-      };
-    } catch (error) {
-      throw CustomError.internalServer(`${error}`);
-    }
-  }
+
   async findOne(id: string): Promise<BookEntenty> {
     try {
       const book = await prisma.book.findFirst({
@@ -90,13 +80,13 @@ export class BookDataSourceImpl implements BookDataSource {
   ): Promise<{ pagination: PaginationEntity; books: BookEntenty[] }> {
     const where: Prisma.BookWhereInput = {};
     const { page, pageSize, search } = dto;
-     if (search) {
-       where.OR = [
-         { title: { contains: search, mode: 'insensitive' } },
-         { author: { name: { contains: search, mode: 'insensitive' } } },
-         { genre: { name: { contains: search, mode: 'insensitive' } } },
-       ];
-     }
+    if (search) {
+      where.OR = [
+        { title: { contains: search, mode: 'insensitive' } },
+        { author: { name: { contains: search, mode: 'insensitive' } } },
+        { genre: { name: { contains: search, mode: 'insensitive' } } },
+      ];
+    }
     const [books, total] = await Promise.all([
       prisma.book.findMany({
         skip: PaginationEntity.dinamycOffset(page, pageSize!),

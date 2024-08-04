@@ -10,12 +10,10 @@ export class GenreService {
   async patch(dto: PatchGenderDto): Promise<GenreEntenty> {
     return await this.repository.patch(dto);
   }
-  async softDelete(id: string): Promise<Object> {
-    return await this.repository.softDelete(id);
+  async changeRecordStatus(id: string): Promise<Object> {
+    return await this.repository.changeRecordStatus(id);
   }
-  async hardDelete(id: string): Promise<Object> {
-    return await this.repository.hardDelete(id);
-  }
+
   async findOne(id: string): Promise<GenreEntenty> {
     return await this.repository.findOne(id);
   }

@@ -11,23 +11,24 @@ export class UserService {
   patch(dto: PatchUserDto): Promise<UserEntity> {
     return this.repository.patch(dto);
   }
-  hardDelete(id: string): Promise<Object> {
-    return this.repository.hardDelete(id);
+  changeRecordStatus(id: string): Promise<Object> {
+    return this.repository.changeRecordStatus(id);
   }
-  SoftDelete(id: string): Promise<Object> {
-    return this.repository.SoftDelete(id);
-  }
+
   findOne(id: string): Promise<UserEntity> {
     return this.repository.findOne(id);
   }
- 
+
   findMany(
     dto: PaginationDto,
   ): Promise<{ pagination: PaginationEntity; users: UserEntity[] }> {
     return this.repository.findMany(dto);
   }
 
-  getLoanBooks(dto: PaginationDto, token: string): Promise<{
+  getLoanBooks(
+    dto: PaginationDto,
+    token: string,
+  ): Promise<{
     pagination: PaginationEntity;
     loans: LoanEntity[];
   }> {

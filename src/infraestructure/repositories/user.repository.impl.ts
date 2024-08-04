@@ -12,12 +12,10 @@ export class UserRepositoryImpl implements UserRopository {
   patch(dto: PatchUserDto): Promise<UserEntity> {
     return this.datasource.patch(dto);
   }
-  hardDelete(id: string): Promise<Object> {
-    return this.datasource.hardDelete(id);
+  changeRecordStatus(id: string): Promise<Object> {
+    return this.datasource.changeRecordStatus(id);
   }
-  SoftDelete(id: string): Promise<Object> {
-    return this.datasource.SoftDelete(id);
-  }
+
   findOne(id: string): Promise<UserEntity> {
     return this.datasource.findOne(id);
   }
@@ -30,7 +28,10 @@ export class UserRepositoryImpl implements UserRopository {
     return this.datasource.findMany(dto);
   }
 
-  getLoanBooks(dto: PaginationDto, token: string): Promise<{
+  getLoanBooks(
+    dto: PaginationDto,
+    token: string,
+  ): Promise<{
     pagination: PaginationEntity;
     loans: LoanEntity[];
   }> {

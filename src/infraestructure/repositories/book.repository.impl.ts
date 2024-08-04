@@ -15,12 +15,10 @@ export class BookRepositoryImpl implements BookRepository {
   async patch(dto: PatchBookDto): Promise<BookEntenty> {
     return await this.datasource.patch(dto);
   }
-  async softDelete(id: string): Promise<Object> {
-    return await this.datasource.softDelete(id);
+  async changeRecordStatus(id: string): Promise<Object> {
+    return await this.datasource.changeRecordStatus(id);
   }
-  async hardDelete(id: string): Promise<Object> {
-    return await this.datasource.hardDelete(id);
-  }
+
   async findOne(id: string): Promise<BookEntenty> {
     return await this.datasource.findOne(id);
   }

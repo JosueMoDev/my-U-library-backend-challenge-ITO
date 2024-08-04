@@ -34,23 +34,11 @@ export class BookController {
       });
   };
 
-  hardDelete = (request: Request, response: Response) => {
+  changeRecordStatus = (request: Request, response: Response) => {
     const [error, id] = MongoId.validate(request.params.id);
     if (error) return response.status(400).json({ error });
     this.service
-      .hardDelete(id!)
-      .then((data) => response.json(data))
-      .catch((error) => {
-        const { statusCode, errorMessage } = HandlerError.hasError(error);
-        return response.status(statusCode).json({ error: errorMessage });
-      });
-  };
-
-  SoftDelete = (request: Request, response: Response) => {
-    const [error, id] = MongoId.validate(request.params.id);
-    if (error) return response.status(400).json({ error });
-    this.service
-      .softDelete(id!)
+      .changeRecordStatus(id!)
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);
