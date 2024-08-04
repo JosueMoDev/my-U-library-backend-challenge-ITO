@@ -23,21 +23,22 @@ export class PaginationDto {
 
   @IsNotEmpty()
   @IsString()
-  public readonly path!: string;
+  public readonly path?: string;
 
-  private constructor(args: PaginationDto, path: string) {
-    this.page = args.page ? +args.page : 1;
-    this.pageSize = args.pageSize ? +args.pageSize : 5;
+  private constructor({ page, pageSize }: PaginationDto, path: string) {
+    this.page = page ? +page : 1;
+    this.pageSize = pageSize ? +pageSize : 5;
     this.path = path.split('?')[0].replace(/^\/api/, '');
   }
 
   static validate(
-    object: PaginationDto,
+    object: PaginationDto | any,
     path: string,
-  ): [undefined | string[], PaginationDto?] {
+  ): [{ [key: string]: string }[] | string[] | undefined, PaginationDto?] {
     const createDto = new PaginationDto(object, path);
 
-    const [errors, dto] = CustomValidatorErrors.validateDto<PaginationDto>(createDto);
+    const [errors, dto] =
+      CustomValidatorErrors.validateDto<PaginationDto>(createDto);
 
     if (errors) return [errors];
 

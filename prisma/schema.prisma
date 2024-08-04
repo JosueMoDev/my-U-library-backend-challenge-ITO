@@ -76,5 +76,5 @@ model Loan {
   bookId     String    @db.ObjectId
   book       Book      @relation(fields: [bookId], references: [id])
   borrowedAt DateTime  @default(now())
-  returnedAt DateTime? @updatedAt()
+  returnedAt DateTime? 
 }

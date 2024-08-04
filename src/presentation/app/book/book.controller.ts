@@ -72,7 +72,7 @@ export class BookController {
 
   findMany = (request: Request, response: Response) => {
     const [error, dto] = PaginationDto.validate(
-      request.body,
+      request.query,
       request.originalUrl,
     );
     if (error) return response.status(400).json({ error });

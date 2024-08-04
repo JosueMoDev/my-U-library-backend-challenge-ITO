@@ -1,6 +1,6 @@
 import { CustomValidatorErrors } from '@handler-errors';
 import {
-  IsISO8601,
+  IsDate,
   IsMongoId,
   IsNotEmpty,
   IsPositive,
@@ -9,14 +9,13 @@ import {
 } from 'class-validator';
 
 export class CreateBookDto {
-
   @IsNotEmpty()
   @IsString()
   public title!: string;
 
   @IsNotEmpty()
-  @IsISO8601({ strict: true })
-  public publicationDate!: string;
+  @IsDate({ message: 'Date must be in the format YYYY-MM-DD' })
+  public publicationDate!: Date;
 
   @IsNotEmpty()
   @IsString()
@@ -37,9 +36,12 @@ export class CreateBookDto {
 
   constructor(args: CreateBookDto) {
     Object.assign(this, args);
+    this.publicationDate = new Date(args.publicationDate);
   }
 
-  static validate(object: CreateBookDto): [undefined | string[], CreateBookDto?] {
+  static validate(
+    object: CreateBookDto,
+  ): [undefined | string[], CreateBookDto?] {
     const createDto = new CreateBookDto(object);
 
     const [errors, dto] =
