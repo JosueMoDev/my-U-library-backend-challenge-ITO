@@ -96,7 +96,7 @@ export class UserController {
       return response.status(400).json({ error: ' NO token provided' });
     const token = bearerToken.split(' ');
     const [error, dto] = PaginationDto.validate(
-      request.body,
+      request.query,
       request.originalUrl,
     );
     if (error) return response.status(400).json({ error });
