@@ -1,6 +1,6 @@
 import { CustomValidatorErrors } from '@handler-errors';
 import {
-  IsISO8601,
+  IsDate,
   IsMongoId,
   IsNotEmpty,
   IsOptional,
@@ -25,11 +25,14 @@ export class PatchAuthorDto {
   public bio?: string;
 
   @IsOptional()
-  @IsISO8601({ strict: true })
-  public birthdate?: string;
+  @IsDate(
+    { message: 'Date must be in the format YYYY-MM-DD' },
+  )
+  public birthdate?: Date;
 
   constructor(args: PatchAuthorDto) {
     Object.assign(this, args);
+    if(args.birthdate) this.birthdate = new Date(this.birthdate!)
   }
 
   static validate(
@@ -37,7 +40,8 @@ export class PatchAuthorDto {
   ): [undefined | string[], PatchAuthorDto?] {
     const createDto = new PatchAuthorDto(object);
 
-    const [errors, dto] = CustomValidatorErrors.validateDto<PatchAuthorDto>(createDto);
+    const [errors, dto] =
+      CustomValidatorErrors.validateDto<PatchAuthorDto>(createDto);
 
     if (errors) return [errors];
 

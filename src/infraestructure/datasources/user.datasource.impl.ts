@@ -24,6 +24,7 @@ export class UserDataSourceImpl implements UserDataSource {
     }
   }
   async patch({ id, ...rest }: PatchUserDto): Promise<UserEntity> {
+    if (!Object.keys(rest).length) throw CustomError.badRequest('There is nothing to modify');
     await this.findOne(id);
     try {
       const user = await prisma.user.update({

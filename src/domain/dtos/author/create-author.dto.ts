@@ -1,5 +1,5 @@
 import { CustomValidatorErrors } from '@handler-errors';
-import { IsISO8601, IsNotEmpty, IsString } from 'class-validator';
+import { IsDate, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateAuthorDto {
   @IsNotEmpty()
@@ -15,15 +15,17 @@ export class CreateAuthorDto {
   public bio!: string;
 
   @IsNotEmpty()
-  @IsISO8601({ strict: true })
-  public birthdate!: string;
+  @IsDate( { message: 'Date must be in the format YYYY-MM-DD'})
+  
+  public birthdate!: Date;
 
   constructor(args: CreateAuthorDto) {
     Object.assign(this, args);
+    this.birthdate = new Date(args.birthdate)
   }
 
   static validate(
-    object: CreateAuthorDto,
+    object : CreateAuthorDto,
   ): [undefined | string[], CreateAuthorDto?] {
     const createDto = new CreateAuthorDto(object);
 
