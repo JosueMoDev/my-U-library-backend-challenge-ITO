@@ -9,5 +9,5 @@ export abstract class UserDataSource {
   abstract findOne(id: string): Promise<UserEntity>;
   abstract findOneByEmail(email: string): Promise<UserEntity>;
   abstract findMany(dto: PaginationDto): Promise<{ pagination: PaginationEntity, users: UserEntity[] }>;
-  abstract getLoanBooks(dto:PaginationDto): Promise<{pagination: PaginationEntity, loans: LoanEntity[]}>
+  abstract getLoanBooks(dto:PaginationDto, token: string): Promise<{pagination: PaginationEntity, loans: LoanEntity[]}>
 }

@@ -25,9 +25,14 @@ export class PaginationDto {
   @IsString()
   public readonly path?: string;
 
-  private constructor({ page, pageSize }: PaginationDto, path: string) {
+  @IsOptional()
+  @IsString()
+  public readonly search?: string;
+
+  private constructor({ page, pageSize, search }: PaginationDto, path: string) {
     this.page = page ? +page : 1;
     this.pageSize = pageSize ? +pageSize : 5;
+    this.search =  search
     this.path = path.split('?')[0].replace(/^\/api/, '');
   }
 

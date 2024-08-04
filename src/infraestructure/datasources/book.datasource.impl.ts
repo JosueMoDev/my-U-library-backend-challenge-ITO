@@ -3,6 +3,7 @@ import { BookDataSource } from '@domain/datasources';
 import { CreateBookDto, PatchBookDto, PaginationDto } from '@domain/dtos';
 import { BookEntenty, PaginationEntity } from '@domain/entities';
 import { CustomError } from '@handler-errors';
+import { Prisma } from '@prisma/client';
 
 export class BookDataSourceImpl implements BookDataSource {
   public includes = {
@@ -87,14 +88,23 @@ export class BookDataSourceImpl implements BookDataSource {
   async findMany(
     dto: PaginationDto,
   ): Promise<{ pagination: PaginationEntity; books: BookEntenty[] }> {
-    const { page, pageSize } = dto;
+    const where: Prisma.BookWhereInput = {};
+    const { page, pageSize, search } = dto;
+     if (search) {
+       where.OR = [
+         { title: { contains: search, mode: 'insensitive' } },
+         { author: { name: { contains: search, mode: 'insensitive' } } },
+         { genre: { name: { contains: search, mode: 'insensitive' } } },
+       ];
+     }
     const [books, total] = await Promise.all([
       prisma.book.findMany({
         skip: PaginationEntity.dinamycOffset(page, pageSize!),
         take: pageSize,
-        include: this.includes,
+        where,
       }),
-      prisma.book.count(),
+
+      prisma.book.count({ where }),
     ]);
 
     const pagination = PaginationEntity.setPagination({

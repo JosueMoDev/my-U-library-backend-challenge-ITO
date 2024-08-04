@@ -1,12 +1,12 @@
 import { BookEntenty } from "./book.entity";
 
 export class AuthorEntenty {
-  public id: string;
+  public id?: string;
   public name: string;
   public lastName: string;
-  public bio: string;
+  public bio?: string;
   public isActive?: boolean;
-  public birthdate: Date;
+  public birthdate?: Date;
 
   constructor({ id, name, lastName, bio, birthdate , isActive}: AuthorEntenty) {
     this.id = id;

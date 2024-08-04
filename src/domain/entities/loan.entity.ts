@@ -3,11 +3,12 @@ import { UserEntity, BookEntenty } from '@domain/entities';
 
 export class LoanEntity {
   public id: string;
-  public user: Pick<UserEntity, 'email' | 'name' | 'lastName'>;
+  public user?: Pick<UserEntity, 'email' | 'name' | 'lastName'>;
   public loanState: LoanState;
-  public book:  Pick<BookEntenty, 'author' | 'title' | 'id'| 'coverImageUrl' >;
+  public book:  Pick<BookEntenty, 'author' | 'title' | 'coverImageUrl' >;
   public borrowedAt: Date;
   public returnedAt?: Date | null;
+  public returnBook?: string;
 
   constructor({
     id,
@@ -23,6 +24,7 @@ export class LoanEntity {
     this.book = book;
     this.borrowedAt = borrowedAt;
     this.returnedAt = returnedAt;
+    if(loanState==='BORROWED') this.returnBook = `/loans/return/${id}`
   }
   static fromObject(loan: LoanEntity): LoanEntity {
     return new LoanEntity(loan);

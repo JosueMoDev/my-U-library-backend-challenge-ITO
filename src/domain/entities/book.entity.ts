@@ -6,10 +6,11 @@ export class BookEntenty {
   public publicationDate: Date;
   public description: string;
   public coverImageUrl?: string | null;
-  public stock: number;
-  public author: Pick<AuthorEntenty, 'name' | 'id' | 'lastName'>;
-  public genre: GenreEntenty;
+  public stock?: number;
+  public author?: Pick<AuthorEntenty, 'name' | 'id' | 'lastName'>;
+  public genre?: GenreEntenty;
   public isActive?: boolean;
+  public seeDetails?: string; 
   constructor({
     id,
     title,
@@ -19,7 +20,7 @@ export class BookEntenty {
     stock,
     author,
     genre,
-    isActive
+    isActive,
   }: BookEntenty) {
     this.id = id;
     this.title = title;
@@ -29,7 +30,8 @@ export class BookEntenty {
     this.stock = stock;
     this.author = author;
     this.genre = genre;
-    this.isActive = isActive
+    this.isActive = isActive;
+    if(!author)this.seeDetails =  `/books/find-one/${id}`;
   }
   static fromObject(book: BookEntenty): BookEntenty {
     return new BookEntenty(book);

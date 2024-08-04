@@ -27,10 +27,10 @@ export class UserService {
     return this.repository.findMany(dto);
   }
 
-  getLoanBooks(dto: PaginationDto): Promise<{
+  getLoanBooks(dto: PaginationDto, token: string): Promise<{
     pagination: PaginationEntity;
     loans: LoanEntity[];
   }> {
-    return this.repository.getLoanBooks(dto);
+    return this.repository.getLoanBooks(dto, token);
   }
 }

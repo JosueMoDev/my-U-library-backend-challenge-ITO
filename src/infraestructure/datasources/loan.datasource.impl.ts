@@ -12,7 +12,6 @@ export class LoanDataSourceImpl implements LoanDataSource {
         title: true,
         author: {
           select: {
-            id: true,
             name: true,
             lastName: true,
           },

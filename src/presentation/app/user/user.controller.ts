@@ -50,6 +50,10 @@ export class UserController {
   SoftDelete = (request: Request, response: Response) => {
     const [error, id] = MongoId.validate(request.params.id);
     if (error) return response.status(400).json({ error });
+      const bearerToken = request.headers['authorization'];
+    if (!bearerToken)
+      return response.status(400).json({ error: ' NO token provided' });
+    const token = bearerToken.split(' ');
     this.service
       .SoftDelete(id!)
       .then((data) => response.json(data))
@@ -87,13 +91,17 @@ export class UserController {
   };
 
   getLoanBooks = (request: Request, response: Response) => {
+    const bearerToken = request.headers['authorization'];
+    if (!bearerToken)
+      return response.status(400).json({ error: ' NO token provided' });
+    const token = bearerToken.split(' ');
     const [error, dto] = PaginationDto.validate(
       request.body,
       request.originalUrl,
     );
     if (error) return response.status(400).json({ error });
     this.service
-      .getLoanBooks(dto!)
+      .getLoanBooks(dto!, token[1]!)
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);

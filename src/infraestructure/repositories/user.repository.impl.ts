@@ -30,10 +30,10 @@ export class UserRepositoryImpl implements UserRopository {
     return this.datasource.findMany(dto);
   }
 
-  getLoanBooks(dto: PaginationDto): Promise<{
+  getLoanBooks(dto: PaginationDto, token: string): Promise<{
     pagination: PaginationEntity;
     loans: LoanEntity[];
   }> {
-    return this.datasource.getLoanBooks(dto);
+    return this.datasource.getLoanBooks(dto, token);
   }
 }

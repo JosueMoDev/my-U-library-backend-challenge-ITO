@@ -1,4 +1,4 @@
-import { BcryptJsPlugin, prisma } from '@config';
+import { BcryptJsPlugin, JsonWebTokenPlugin, prisma } from '@config';
 import { UserDataSource } from '@domain/datasources';
 import { CreateUserDto, PatchUserDto, PaginationDto } from '@domain/dtos';
 import { UserEntity, PaginationEntity, LoanEntity } from '@domain/entities';
@@ -96,25 +96,32 @@ export class UserDataSourceImpl implements UserDataSource {
 
   async getLoanBooks(
     dto: PaginationDto,
+    token: string,
   ): Promise<{ pagination: PaginationEntity; loans: LoanEntity[] }> {
     const { page, pageSize } = dto;
+    const isValidToken = await JsonWebTokenPlugin.validateToken(token);
+    if (!isValidToken) throw CustomError.badRequest('Token not valid');
+    const { id } = await this.findOne(isValidToken.id);
     const [loans, total] = await Promise.all([
       prisma.loan.findMany({
         skip: PaginationEntity.dinamycOffset(page, pageSize),
         take: pageSize,
-        where: {},
+        where: { userId: id, user: { role: 'STUDENT' } },
         include: {
-          user: true,
           book: {
             select: {
               title: true,
-              author: true,
-              id: true,
+              author: {
+                select: {
+                  name: true,
+                  lastName: true,
+                },
+              },
             },
           },
         },
       }),
-      prisma.loan.count({ where: {} }),
+      prisma.loan.count({ where: { userId: id, user: { role: 'STUDENT' } } }),
     ]);
 
     const pagination = PaginationEntity.setPagination({ ...dto, total });
