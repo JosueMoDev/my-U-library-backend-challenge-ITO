@@ -21,6 +21,9 @@ export class UserRepositoryImpl implements UserRopository {
   findOne(id: string): Promise<UserEntity> {
     return this.datasource.findOne(id);
   }
+  findOneByEmail(email: string): Promise<UserEntity> {
+    return this.datasource.findOneByEmail(email);
+  }
   findMany(
     dto: PaginationDto,
   ): Promise<{ pagination: PaginationEntity; users: UserEntity[] }> {

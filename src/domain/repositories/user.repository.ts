@@ -7,6 +7,7 @@ export abstract class UserRopository {
   abstract hardDelete(id: string): Promise<Object>;
   abstract SoftDelete(id: string): Promise<Object>;
   abstract findOne(id: string): Promise<UserEntity>;
+  abstract findOneByEmail(email: string): Promise<UserEntity>;
   abstract findMany(dto: PaginationDto): Promise<{ pagination: PaginationEntity, users: UserEntity[] }>;
   abstract getLoanBooks(dto: PaginationDto): Promise<{ pagination: PaginationEntity, loans: LoanEntity[] }>;
 }

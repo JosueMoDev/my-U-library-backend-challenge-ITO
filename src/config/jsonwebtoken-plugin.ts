@@ -1,9 +1,15 @@
 import jwt from 'jsonwebtoken';
 import {  EnvironmentVariables } from './env';
+import { ROLE } from '@prisma/client';
 
 const JWT_SEED = EnvironmentVariables.SECRET_KEY_JWT;
-
-export class JWTAdapter {
+type ValidToken = {
+  id: string;
+  role: ROLE;
+  ait: number;
+  exp: number;
+};
+export class JsonWebTokenPlugin {
   static async generateToken(
     payload: any,
     duration: string = '2h',
@@ -17,13 +23,13 @@ export class JWTAdapter {
     });
   }
 
-  static async validateToken<T>(token: string): Promise<T | null> {
+  static async validateToken<T>(token: string): Promise< ValidToken| null> {
     return new Promise((resolve) => {
       jwt.verify(token, JWT_SEED, (err, decoded) => {
         if (err) {
           return resolve(null);
         }
-        resolve(decoded as T);
+        resolve(decoded as ValidToken);
       });
     });
   }

@@ -9,7 +9,7 @@ export class UserDataSourceImpl implements UserDataSource {
     password: _password,
     ...dto
   }: CreateUserDto): Promise<UserEntity> {
-    await this.#findUserByEmail(dto.email);
+    await this.CheckIfEmailExist(dto.email);
     try {
       const password = BcryptJsPlugin.hashPassword(_password);
       const user = await prisma.user.create({
@@ -57,7 +57,7 @@ export class UserDataSourceImpl implements UserDataSource {
           isActive: !isActive,
         },
       });
-    
+
       return {
         message: `User '${name}' ${
           isActive ? 'inactivated' : 'activated'
@@ -92,45 +92,44 @@ export class UserDataSourceImpl implements UserDataSource {
     return { pagination, users: userMapped };
   }
 
-  async getLoanBooks(dto: PaginationDto): Promise<{ pagination: PaginationEntity, loans: LoanEntity[]}> {
-      
-      const { page, pageSize } = dto;
-      const [loans, total] = await Promise.all([
-        prisma.loan.findMany({
-          skip: PaginationEntity.dinamycOffset(page, pageSize),
-          take: pageSize,
-          where: {},
-          include: {
-            user: {
-              select: {
-                name: true,
-                email: true,
-                lastName: true
-              }
+  async getLoanBooks(
+    dto: PaginationDto,
+  ): Promise<{ pagination: PaginationEntity; loans: LoanEntity[] }> {
+    const { page, pageSize } = dto;
+    const [loans, total] = await Promise.all([
+      prisma.loan.findMany({
+        skip: PaginationEntity.dinamycOffset(page, pageSize),
+        take: pageSize,
+        where: {},
+        include: {
+          user: true,
+          book: {
+            select: {
+              title: true,
+              author: true,
+              id: true,
             },
-            book: {
-              select: {
-                title: true,
-                coverImageUrl: true,
-                author: true,
-                genre: true,
-              }
-            },
-          }
-        }),
-        prisma.loan.count({ where: {}}),
-      ]);
-  
-      const pagination = PaginationEntity.setPagination({ ...dto, total });
-      const loansMapped = loans.map((entity) => LoanEntity.fromObject(entity));
-    return { pagination, loans: loansMapped };
+          },
+        },
+      }),
+      prisma.loan.count({ where: {} }),
+    ]);
 
+    const pagination = PaginationEntity.setPagination({ ...dto, total });
+    const loansMapped = loans.map(LoanEntity.fromObject);
+    return { pagination, loans: loansMapped };
   }
 
-  async #findUserByEmail(email: string): Promise<void> {
+  async CheckIfEmailExist(email: string): Promise<void> {
     const emailExist = await prisma.user.findFirst({
       where: { email },
     });
     if (emailExist) throw CustomError.badRequest('User already exist');
+  }
+
+  async findOneByEmail(email: string): Promise<UserEntity> {
+    const user = await prisma.user.findFirst({where: { email }});
+    if (!user) throw CustomError.badRequest('Not user found');
+    return UserEntity.fromObject(user);
   }
 }

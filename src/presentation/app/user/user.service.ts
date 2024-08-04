@@ -6,13 +6,13 @@ export class UserService {
   constructor(private readonly repository: UserRopository) {}
 
   create(dto: CreateUserDto): Promise<UserEntity> {
-    return  this.repository.create(dto);
+    return this.repository.create(dto);
   }
   patch(dto: PatchUserDto): Promise<UserEntity> {
     return this.repository.patch(dto);
   }
   hardDelete(id: string): Promise<Object> {
-    return  this.repository.hardDelete(id);
+    return this.repository.hardDelete(id);
   }
   SoftDelete(id: string): Promise<Object> {
     return this.repository.SoftDelete(id);
@@ -20,6 +20,7 @@ export class UserService {
   findOne(id: string): Promise<UserEntity> {
     return this.repository.findOne(id);
   }
+ 
   findMany(
     dto: PaginationDto,
   ): Promise<{ pagination: PaginationEntity; users: UserEntity[] }> {
@@ -30,6 +31,6 @@ export class UserService {
     pagination: PaginationEntity;
     loans: LoanEntity[];
   }> {
-   return this.repository.getLoanBooks(dto);
+    return this.repository.getLoanBooks(dto);
   }
 }

@@ -1,16 +1,11 @@
 import { LoanState } from "@prisma/client";
 import { UserEntity, BookEntenty } from '@domain/entities';
 
-
-interface User {
-  name: string,
-  email: string,
-}
 export class LoanEntity {
   public id: string;
   public user: Pick<UserEntity, 'email' | 'name' | 'lastName'>;
   public loanState: LoanState;
-  public book: Pick<BookEntenty, 'title' | 'author' | 'coverImageUrl' | 'genre'> ;
+  public book:  Pick<BookEntenty, 'author' | 'title' | 'id'| 'coverImageUrl' >;
   public borrowedAt: Date;
   public returnedAt?: Date | null;
 

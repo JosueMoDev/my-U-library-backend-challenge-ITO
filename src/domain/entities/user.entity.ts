@@ -10,7 +10,6 @@ export class UserEntity {
   public password: string;
   public isActive: boolean;
   public createdAt: Date;
-  public loans?: LoanEntity[];
 
   constructor({
     id,
@@ -21,7 +20,6 @@ export class UserEntity {
     password,
     isActive,
     createdAt,
-    loans,
   }: UserEntity) {
     this.id = id;
     this.name = name;
@@ -31,7 +29,6 @@ export class UserEntity {
     this.password = password;
     this.isActive = isActive;
     this.createdAt = createdAt;
-    this.loans = loans;
   }
   static fromObject(user: UserEntity): UserEntity {
     return new UserEntity(user);

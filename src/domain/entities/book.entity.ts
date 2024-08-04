@@ -7,8 +7,8 @@ export class BookEntenty {
   public description: string;
   public coverImageUrl?: string | null;
   public stock: number;
-  public author: AuthorEntenty;
-  public genre: Pick<GenreEntenty, 'id' | 'name'>;
+  public author: Pick<AuthorEntenty, 'name' | 'id' | 'lastname'>;
+  public genre: GenreEntenty;
   constructor({
     id,
     title,

@@ -6,14 +6,13 @@ export class AuthorEntenty {
   public lastname: string;
   public bio: string;
   public birthdate: Date;
-  public books?: BookEntenty[];
-  constructor({ id, name, lastname, bio, birthdate, books }: AuthorEntenty) {
+
+  constructor({ id, name, lastname, bio, birthdate }: AuthorEntenty) {
     this.id = id;
     this.name = name;
     this.lastname = lastname;
     this.bio = bio;
     this.birthdate = birthdate;
-    this.books = books;
   }
   static fromObject( author: AuthorEntenty): AuthorEntenty {
     return new AuthorEntenty(author);
