@@ -5,7 +5,7 @@ export class CreateGenderDto {
   
   @IsNotEmpty()
   @IsString()
-  public name?: string;
+  public name!: string;
 
   constructor(args: CreateGenderDto) {
     Object.assign(this, args);

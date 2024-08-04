@@ -38,6 +38,7 @@ export class GenreController {
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);
+        console.log(statusCode, errorMessage)
         return response.status(statusCode).json({ error: errorMessage });
       });
   };
@@ -77,6 +78,7 @@ export class GenreController {
       .then((data) => response.json(data))
       .catch((error) => {
         const { statusCode, errorMessage } = HandlerError.hasError(error);
+        console.log(statusCode, error)
         return response.status(statusCode).json({ error: errorMessage });
       });
   };

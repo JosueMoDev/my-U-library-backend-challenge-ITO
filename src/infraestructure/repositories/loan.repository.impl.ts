@@ -12,7 +12,7 @@ export class LoanRepositoryImpl implements LoanRepository {
   async patch(dto: PatchLoanDto): Promise<LoanEntity> {
     return await this.datasource.patch(dto);
   }
-  async return(id: string): Promise<boolean> {
+  async return(id: string): Promise<Object> {
     return await this.datasource.return(id);
   }
   async findOne(id: string): Promise<LoanEntity> {

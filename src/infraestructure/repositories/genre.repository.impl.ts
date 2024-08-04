@@ -11,10 +11,10 @@ export class GenreRepositoryImpl implements GenreRepository {
   async patch(dto: PatchGenderDto): Promise<GenreEntenty> {
     return await this.datasource.patch(dto);
   }
-  async softDelete(id: string): Promise<boolean> {
+  async softDelete(id: string): Promise<Object> {
     return await this.datasource.softDelete(id);
   }
-  async hardDelete(id: string): Promise<boolean> {
+  async hardDelete(id: string): Promise<Object> {
     return await this.datasource.hardDelete(id);
   }
   async findOne(id: string): Promise<GenreEntenty> {

@@ -11,7 +11,7 @@ export class LoanService {
   async patch(dto: PatchLoanDto): Promise<LoanEntity> {
     return await this.repository.patch(dto);
   }
-  async return(id: string): Promise<boolean> {
+  async return(id: string): Promise<Object> {
     return await this.repository.return(id);
   }
   async findOne(id: string): Promise<LoanEntity> {

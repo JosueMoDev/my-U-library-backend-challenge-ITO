@@ -61,7 +61,7 @@ export class UserDataSourceImpl implements UserDataSource {
 
       return {
         message: `User '${name}' ${
-          isActive ? 'inactivated' : 'activated'
+          isActive ? 'disabled' : 'enabled'
         } successfully`,
       };
     } catch (error) {
@@ -89,8 +89,8 @@ export class UserDataSourceImpl implements UserDataSource {
     ]);
 
     const pagination = PaginationEntity.setPagination({ ...dto, total });
-    const userMapped = users.map(UserEntity.fromObject);
-    return { pagination, users: userMapped };
+    const usersMapped = users.map(UserEntity.fromObject);
+    return { pagination, users: usersMapped };
   }
 
   async getLoanBooks(

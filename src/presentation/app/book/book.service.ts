@@ -10,10 +10,10 @@ export class BookService {
   async patch(dto: PatchBookDto): Promise<BookEntenty> {
     return await this.repository.patch(dto);
   }
-  async softDelete(id: string): Promise<boolean> {
+  async softDelete(id: string): Promise<Object> {
     return await this.repository.softDelete(id);
   }
-  async hardDelete(id: string): Promise<boolean> {
+  async hardDelete(id: string): Promise<Object> {
     return await this.repository.hardDelete(id);
   }
   async findOne(id: string): Promise<BookEntenty> {

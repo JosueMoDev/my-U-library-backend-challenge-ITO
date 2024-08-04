@@ -73,7 +73,7 @@ export class AuthorDataSourceImpl implements AuthorDataSource {
     ]);
 
     const pagination = PaginationEntity.setPagination({ ...dto, total });
-    const userMapped = authors.map(AuthorEntenty.fromObject);
-    return { pagination, authors: userMapped };
+    const authorsMapped = authors.map(AuthorEntenty.fromObject);
+    return { pagination, authors: authorsMapped };
   }
 }
