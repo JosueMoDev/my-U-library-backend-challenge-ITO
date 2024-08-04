@@ -9,6 +9,7 @@ export class BookEntenty {
   public stock: number;
   public author: Pick<AuthorEntenty, 'name' | 'id' | 'lastName'>;
   public genre: GenreEntenty;
+  public isActive?: boolean;
   constructor({
     id,
     title,
@@ -18,6 +19,7 @@ export class BookEntenty {
     stock,
     author,
     genre,
+    isActive
   }: BookEntenty) {
     this.id = id;
     this.title = title;
@@ -27,6 +29,7 @@ export class BookEntenty {
     this.stock = stock;
     this.author = author;
     this.genre = genre;
+    this.isActive = isActive
   }
   static fromObject(book: BookEntenty): BookEntenty {
     return new BookEntenty(book);

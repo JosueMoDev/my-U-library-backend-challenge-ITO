@@ -24,7 +24,8 @@ export class UserDataSourceImpl implements UserDataSource {
     }
   }
   async patch({ id, ...rest }: PatchUserDto): Promise<UserEntity> {
-    if (!Object.keys(rest).length) throw CustomError.badRequest('There is nothing to modify');
+    if (!Object.keys(rest).length)
+      throw CustomError.badRequest('There is nothing to modify');
     await this.findOne(id);
     try {
       const user = await prisma.user.update({
@@ -129,7 +130,7 @@ export class UserDataSourceImpl implements UserDataSource {
   }
 
   async findOneByEmail(email: string): Promise<UserEntity> {
-    const user = await prisma.user.findFirst({where: { email }});
+    const user = await prisma.user.findFirst({ where: { email } });
     if (!user) throw CustomError.badRequest('Not user found');
     return UserEntity.fromObject(user);
   }

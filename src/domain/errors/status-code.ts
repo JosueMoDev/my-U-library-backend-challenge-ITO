@@ -3,7 +3,7 @@ export class CustomError extends Error {
     public readonly statusCode: number,
     public readonly message: string,
   ) {
-    super(message);
+    super(message.toUpperCase());
   }
 
   static badRequest(message: string) {

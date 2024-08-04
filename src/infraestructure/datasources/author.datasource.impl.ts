@@ -16,7 +16,8 @@ export class AuthorDataSourceImpl implements AuthorDataSource {
     }
   }
   async patch({ id, ...rest }: PatchAuthorDto): Promise<AuthorEntenty> {
-    if (!Object.keys(rest).length) throw CustomError.badRequest('There is nothing to modify');
+    if (!Object.keys(rest).length)
+      throw CustomError.badRequest('There is nothing to modify');
     try {
       await this.findOne(id);
       const author = await prisma.author.update({
@@ -29,22 +30,24 @@ export class AuthorDataSourceImpl implements AuthorDataSource {
     }
   }
   async softDelete(id: string): Promise<Object> {
+    const { isActive, name, lastName } = await this.findOne(id);
     try {
-      const { isActive, name, lastName } = await this.findOne(id);
       await prisma.author.update({
         where: { id },
         data: { isActive: !isActive },
       });
       return {
-        message: `The Author ${name} ${lastName} ${isActive ? 'disabled' : 'enabled'} succesfully`,
+        message: `The Author ${name} ${lastName} ${
+          isActive ? 'disabled' : 'enabled'
+        } succesfully`,
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
   }
   async hardDelete(id: string): Promise<Object> {
+    const { name, lastName } = await this.findOne(id);
     try {
-      const { name, lastName } = await this.findOne(id);
       await prisma.author.delete({ where: { id } });
       return { message: `The Author ${name} ${lastName} deleted successfully` };
     } catch (error) {
@@ -54,7 +57,7 @@ export class AuthorDataSourceImpl implements AuthorDataSource {
   async findOne(id: string): Promise<AuthorEntenty> {
     try {
       const author = await prisma.author.findUnique({ where: { id } });
-      if (!author) throw CustomError.badRequest('Any author was found');
+      if (!author) throw CustomError.badRequest('author not found');
       return AuthorEntenty.fromObject(author);
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
