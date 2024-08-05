@@ -43,20 +43,22 @@ A small university library system where students can check out physical books. T
     yarn install
     ```
 
-3. **Set up environment variables:**
+3. **Generate Prisma Client:**
 
-    Create a `.env` file in the root directory and add your MongoDB connection string and other necessary environment variables.
-
-    ```env
-    DATABASE_URL=mongodb://your-mongo-url
-    JWT_SECRET=your-jwt-secret
-    PORT=3000
+    ```bash
+    npx prisma generate
     ```
 
 4. **Run the development server:**
 
     ```bash
     yarn dev
+    ```
+
+5. **Run the seed script:**
+
+    ```bash
+    yarn seed
     ```
 
 ## 🚀 Usage
@@ -191,6 +193,6 @@ This project is licensed under the MIT License.
     - Middleware to serve auto-generated Swagger API documentation.
     - [Yarn Page](https://yarnpkg.com/package/swagger-ui-express)
 
-18. **tsconfig-paths**: No type definition file needed.
+18. **module-alias**: No type definition file needed.
     - Library to load modules whose location is specified in the paths section of tsconfig.json.
-    - [Yarn Page](https://yarnpkg.com/package/tsconfig-paths)
+    - [Yarn Page](https://yarnpkg.com/search?q=module-alias)
