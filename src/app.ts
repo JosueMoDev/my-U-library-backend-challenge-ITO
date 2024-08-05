@@ -1,3 +1,4 @@
+import'module-alias'
 import { EnvironmentVariables } from '@config';
 import { AppRoutes, Server } from '@presentation';
 
