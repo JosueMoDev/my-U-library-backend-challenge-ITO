@@ -3,6 +3,7 @@ import { BookRepositoryImpl } from "@infraestructure/repositoriesimpl";
 import { Router } from "express";
 import { BookService } from "./book.service";
 import { BookController } from "./book.controller";
+import { AuthorizationMidddleware } from "@middlewares";
 
 export class BookRoutes {
   static get routes(): Router {
@@ -13,10 +14,11 @@ export class BookRoutes {
     const service = new BookService(repository);
     const controller = new BookController(service);
 
-    router.post('/create', controller.create);
-    router.patch('/patch', controller.patch);
     router.get('/find-one/:id', controller.findOne);
     router.get('/find-many', controller.findMany);
+    router.use(AuthorizationMidddleware.hasPermission);
+    router.patch('/patch', controller.patch);
+    router.post('/create', controller.create);
     router.patch('/change-status/:id', controller.changeRecordStatus);
     
 

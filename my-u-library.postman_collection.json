@@ -1,0 +1,855 @@
+{
+	"info": {
+		"_postman_id": "25d113f7-118e-4722-8544-d302a5a622e3",
+		"name": "my-u-library",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19378941",
+		"_collection_link": "https://josuemodev.postman.co/workspace/development~9f3f3795-a105-4a6c-9c20-125e4605b543/collection/19378941-25d113f7-118e-4722-8544-d302a5a622e3?action=share&source=collection_link&creator=19378941"
+	},
+	"item": [
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"lewandosky@libraian.com\",\n    \"password\": \"abcdefgh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/authentication/login",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"authentication",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VALIDATE TOKEN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/authentication/validate-token",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"authentication",
+								"validate-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "FIND MANY -  PAGINATED",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDFhNzc2OWNiYmRkZWJmNmIyZiIsInJvbGUiOiJTVFVERU5UIiwiaWF0IjoxNzIyODIwMjg4LCJleHAiOjE3MjI4Mjc0ODh9.J0CZPjwVnZHcSi9hZ_FlQ6BSdNTLmXcoEEzdEaPnSHI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/books/find-many",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"books",
+								"find-many"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "The Great Gatsby",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE BOOK",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/books/create",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"books",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH BOOK",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/books/patch",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"books",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CHANGE STATUS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/books/change-status/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"books",
+								"change-status",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND ONE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/books/find-one/66af3e84547219ca8a58f565",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"books",
+								"find-one",
+								"66af3e84547219ca8a58f565"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "FIND MANY - PAGINATED",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/find-many",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"find-many"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"javi\",\n    \"lastName\":\"cucutbilsen\",\n    \"email\":\"javicucutbilse@email.com\",\n    \"role\":\"STUDENT\",\n    \"password\":\"abcdefgh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users/create",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND ONE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/find-one/66aebe4eccf2eadbee8b7711",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"find-one",
+								"66aebe4eccf2eadbee8b7711"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CHANGE STATUS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/change-status/66aebe4eccf2eadbee8b7711",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"change-status",
+								"66aebe4eccf2eadbee8b7711"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOAN BOOKS BY USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/loan-books",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"loan-books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"66aebd8d7769cbbddebf6b30\",\n    \"name\": \"Robbert\",\n    \"lastName\": \"Lewandosky\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users/patch",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "authors",
+			"item": [
+				{
+					"name": "FIND MANY - PAGINATED",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/authors/find-many",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"authors",
+								"find-many"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE AUTHOR",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"George Raymond Richard\",\n    \"lastName\": \"Martin\",\n    \"bio\": \"George Raymond Richard Martin, conocido como George R. R. Martin y en ocasiones por sus seguidores como GRRM, es un escritor y guionista estadounidense de literatura fantástica, ciencia ficción y terror\",\n    \"birthdate\": \"1993-07-22\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/authors/create",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"authors",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH AUTHOR",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"George Raymond Richard\",\n    \"lastName\": \"Martin\",\n    \"bio\": \"George Raymond Richard Martin, conocido como George R. R. Martin y en ocasiones por sus seguidores como GRRM, es un escritor y guionista estadounidense de literatura fantástica, ciencia ficción y terror\",\n    \"birthdate\": \"1993-07-22\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/authors/patch",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"authors",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CHANGED STATUS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"George Raymond Richard\",\n    \"lastName\": \"Martin\",\n    \"bio\": \"George Raymond Richard Martin, conocido como George R. R. Martin y en ocasiones por sus seguidores como GRRM, es un escritor y guionista estadounidense de literatura fantástica, ciencia ficción y terror\",\n    \"birthdate\": \"1993-07-22\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/authors/change-status/66af00f0abf5fd761757aa0f",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"authors",
+								"change-status",
+								"66af00f0abf5fd761757aa0f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND ONE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/authors/find-one/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"authors",
+								"find-one",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "genres",
+			"item": [
+				{
+					"name": "FIND MANY - PAGINATED",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/genres/find-many",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"genres",
+								"find-many"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND ONE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/genres/find-one/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"genres",
+								"find-one",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE GENRE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"name\": \"Horror\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/genres/create",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"genres",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH GENRE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/genres/patch",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"genres",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "loans",
+			"item": [
+				{
+					"name": "FIND MANY - PAGINATED",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/loans/find-many",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"loans",
+								"find-many"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND ONE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/loans/find-one/66af5757b7d61de0a48807cd",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"loans",
+								"find-one",
+								"66af5757b7d61de0a48807cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE LOAN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"66aebd1a7769cbbddebf6b2f\",\n    \"bookId\":\"66af3e84547219ca8a58f565\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/loans/create",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"loans",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RETURN BOOK",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/loans/return/66af5757b7d61de0a48807cd",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"loans",
+								"return",
+								"66af5757b7d61de0a48807cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH LOAN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YWViZDhkNzc2OWNiYmRkZWJmNmIzMCIsInJvbGUiOiJMSUJSQVJJQU4iLCJpYXQiOjE3MjI4MjExMzUsImV4cCI6MTcyMjgyODMzNX0.1fzbKNV5vewM6EdwXqqDa8QnYerx-em1Ex_OBbaZcAc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/genres/patch",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"genres",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

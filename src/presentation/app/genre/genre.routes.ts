@@ -3,6 +3,7 @@ import { GenreRepositoryImpl } from "@infraestructure/repositoriesimpl";
 import { GenreService } from "./genre.service";
 import { GenreController } from "./genre.controller";
 import { Router } from "express";
+import { AuthorizationMidddleware } from "@middlewares";
 
 export class GenreRoutes {
   static get routes(): Router {
@@ -13,6 +14,7 @@ export class GenreRoutes {
     const service = new GenreService(repository);
     const controller = new GenreController(service);
 
+    router.use(AuthorizationMidddleware.hasPermission);
     router.post('/create', controller.create);
     router.patch('/patch', controller.patch);
     router.get('/find-one/:id', controller.findOne);

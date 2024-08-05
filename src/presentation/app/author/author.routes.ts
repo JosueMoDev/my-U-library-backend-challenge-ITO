@@ -3,6 +3,7 @@ import { Router } from "express";
 import { AuthorService } from "./author.service";
 import { AuthorController } from "./author.controller";
 import { AuthorDataSourceImpl } from "@infraestructure/datasourcesimpl";
+import { AuthorizationMidddleware } from "@middlewares";
 
 export class AuthorRoutes {
   static get routes(): Router {
@@ -13,6 +14,7 @@ export class AuthorRoutes {
     const service = new AuthorService(repository);
     const controller = new AuthorController(service);
 
+    router.use(AuthorizationMidddleware.hasPermission);
     router.post('/create', controller.create);
     router.patch('/patch', controller.patch);
     router.get('/find-one/:id', controller.findOne);

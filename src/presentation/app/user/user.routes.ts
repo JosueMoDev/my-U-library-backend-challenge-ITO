@@ -3,6 +3,7 @@ import { UserRepositoryImpl } from "@infraestructure/repositoriesimpl";
 import { UserService } from "./user.service";
 import { UserController } from "./user.controller";
 import { Router } from "express";
+import { AuthorizationMidddleware } from "@middlewares";
 
 export class UserRoutes {
   static get routes(): Router {
@@ -13,11 +14,12 @@ export class UserRoutes {
     const service = new UserService(repository);
     const controller = new UserController(service);
 
+    router.get('/loan-books', controller.getLoanBooks);
+    router.use(AuthorizationMidddleware.hasPermission);
     router.post('/create', controller.create);
     router.patch('/patch', controller.patch);
     router.get('/find-one/:id', controller.findOne);
     router.get('/find-many', controller.findMany);
-    router.get('/loan-books', controller.getLoanBooks);
     router.patch('/change-status/:id', controller.changeRecordStatus);
     
 

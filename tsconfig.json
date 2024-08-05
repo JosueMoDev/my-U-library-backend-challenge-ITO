@@ -42,7 +42,7 @@
       "@handler-errors": ["./src/domain/errors"],
       "@app": ["./src/presentation/app"],
       "@presentation": ["./src/presentation"],
-      "@middlewares": ["./src/presentation/middlewares"],
+      "@middlewares": ["./src/presentation/app/middlewares"],
       "@config": ["./src/config/index.ts"],
 
 
