@@ -1,4 +1,4 @@
-# 📚 My University Library - ITO
+# 📚 My University Library - ITO Backend Test
 
 A small university library system where students can check out physical books. The system includes roles for both Students and Librarians, allowing them to manage books and users effectively.
 
