@@ -40,7 +40,6 @@ export class LoanDataSourceImpl implements LoanDataSource {
           data: dto,
           include: this.includes,
         });
-        console.log(stock);
         await prisma.book.update({
           where: { id: newLoan.book.id },
           data: {
