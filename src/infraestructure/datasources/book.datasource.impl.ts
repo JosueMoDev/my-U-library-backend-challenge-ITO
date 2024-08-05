@@ -91,6 +91,7 @@ export class BookDataSourceImpl implements BookDataSource {
       prisma.book.findMany({
         skip: PaginationEntity.dinamycOffset(page, pageSize!),
         take: pageSize,
+        include: this.includes,
         where,
       }),
 

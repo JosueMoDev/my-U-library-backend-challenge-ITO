@@ -1,9 +1,9 @@
 import { Express } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import { OpenAPIV3 } from 'openapi-types';
-import { EnvironmentVariables } from '@config';
 import { FromSchemasToDTOS } from './to-schemas-from-dtos';
 import * as paths from './api';
+import { EnvironmentVariables } from '@config';
 
 const apiDocumentation: OpenAPIV3.Document = {
   openapi: '3.1.1',

@@ -1,6 +1,5 @@
-import { EnvironmentVariables } from "@config";
-import { AppRoutes, Server } from "@presentation";
-
+import { EnvironmentVariables } from '@config';
+import { AppRoutes, Server } from '@presentation';
 
 (async () => {
   main();
