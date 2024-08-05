@@ -808,7 +808,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{baseurl}}/loans/return/66af5757b7d61de0a48807cd",
+							"raw": "{{baseurl}}/loans/return-book/66af5757b7d61de0a48807cd",
 							"host": [
 								"{{baseurl}}"
 							],

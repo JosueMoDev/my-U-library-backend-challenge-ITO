@@ -44,6 +44,8 @@
       "@presentation": ["./src/presentation"],
       "@middlewares": ["./src/presentation/app/middlewares"],
       "@config": ["./src/config/index.ts"],
+      "@api-documentation": ["./src/presentation/doc/swagger.config.ts"],
+
 
 
 

@@ -15,13 +15,13 @@ export class LoanRoutes {
     const controller = new LoanController(service);
 
 
-    router.get('/find-one/:id', controller.findOne);
     router.use(AuthorizationMidddleware.hasPermission);
+    router.get('/find-one/:id', controller.findOne);
     router.post('/create', controller.create);
     router.patch('/patch', controller.patch);
     router.get('/find-many', controller.findMany);
-    router.patch('/return/:id', controller.return);
-
+    router.patch('/return-book/:id', controller.return);
+    
     return router;
   }
 }

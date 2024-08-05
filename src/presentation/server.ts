@@ -1,6 +1,7 @@
+import { swaggerConfig } from '@api-documentation';
 import compression from 'compression';
 import express, { Router } from 'express';
-
+import cors from 'cors';
 interface serverConfig {
   port: number;
   routes: Router;
@@ -20,11 +21,14 @@ export class Server {
 
   async start() {
     //* Middlewares
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(compression());
     //* Routes
     this.app.use('/api', this.routes);
+    // * API Documentation
+    swaggerConfig(this.app)
     this.serverListener = this.app.listen(this.port, () =>
       console.log(`Server running on port ${this.port}`),
     );
