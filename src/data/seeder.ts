@@ -1,3 +1,4 @@
+import { genSaltSync, hashSync } from 'bcryptjs';
 import { seedData } from './data';
 import { PrismaClient } from '@prisma/client';
 (async () => {
@@ -17,7 +18,12 @@ async function execute() {
       await tx.genre.deleteMany({});
       await tx.author.deleteMany({});
 
-      await tx.user.createMany({ data: seedData.users });
+      await tx.user.createMany({
+        data: seedData.users.map((user) => ({
+          ...user,
+          password: hashSync(user.password, genSaltSync()),
+        }))
+       });
       await tx.author.createMany({ data: seedData.authors });
       await tx.genre.createMany({ data: seedData.genres });
 
