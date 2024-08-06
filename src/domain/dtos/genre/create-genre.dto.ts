@@ -1,22 +1,22 @@
 import { CustomValidatorErrors } from '@handler-errors';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateGenderDto {
+export class CreateGenreDto {
   
   @IsNotEmpty()
   @IsString()
   public name!: string;
 
-  constructor(args: CreateGenderDto) {
+  constructor(args: CreateGenreDto) {
     Object.assign(this, args);
   }
 
   static validate(
-    object: CreateGenderDto,
-  ): [undefined | string[], CreateGenderDto?] {
-    const createDto = new CreateGenderDto(object);
+    object: CreateGenreDto,
+  ): [undefined | string[], CreateGenreDto?] {
+    const createDto = new CreateGenreDto(object);
 
-    const [errors, dto] = CustomValidatorErrors.validateDto<CreateGenderDto>(createDto);
+    const [errors, dto] = CustomValidatorErrors.validateDto<CreateGenreDto>(createDto);
 
     if (errors) return [errors];
 

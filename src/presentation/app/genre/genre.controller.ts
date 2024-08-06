@@ -1,4 +1,4 @@
-import { CreateGenderDto, MongoId, PaginationDto, PatchGenderDto } from "@domain/dtos";
+import { CreateGenreDto, MongoId, PaginationDto, PatchGenreDto } from "@domain/dtos";
 import { GenreService } from "./genre.service";
 import { Request, Response } from "express";
 import { HandlerError } from "@handler-errors";
@@ -7,7 +7,7 @@ export class GenreController {
   constructor(private readonly service: GenreService) {}
 
   create = (request: Request, response: Response) => {
-    const [error, dto] = CreateGenderDto.validate(request.body);
+    const [error, dto] = CreateGenreDto.validate(request.body);
     if (error) return response.status(400).json({ error });
     this.service
       .create(dto!)
@@ -19,7 +19,7 @@ export class GenreController {
   };
 
   patch = (request: Request, response: Response) => {
-    const [error, dto] = PatchGenderDto.validate(request.body);
+    const [error, dto] = PatchGenreDto.validate(request.body);
     if (error) return response.status(400).json({ error });
     this.service
       .patch(dto!)

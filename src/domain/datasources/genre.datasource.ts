@@ -1,9 +1,9 @@
-import { CreateGenderDto,PaginationDto, PatchGenderDto } from "@domain/dtos";
+import { CreateGenreDto,PaginationDto, PatchGenreDto } from "@domain/dtos";
 import { GenreEntenty, PaginationEntity } from "@domain/entities";
 
 export abstract class GenreDataSource {
-  abstract create(dto: CreateGenderDto): Promise<GenreEntenty>;
-  abstract patch(dto: PatchGenderDto): Promise<GenreEntenty>;
+  abstract create(dto: CreateGenreDto): Promise<GenreEntenty>;
+  abstract patch(dto: PatchGenreDto): Promise<GenreEntenty>;
   abstract changeRecordStatus(id: string): Promise<Object>;
   abstract findOne(id: string): Promise<GenreEntenty>;
   abstract findMany(

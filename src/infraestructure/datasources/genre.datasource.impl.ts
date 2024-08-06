@@ -1,11 +1,11 @@
 import { prisma } from '@config';
 import { GenreDataSource } from '@domain/datasources';
-import { CreateGenderDto, PatchGenderDto, PaginationDto } from '@domain/dtos';
+import { CreateGenreDto, PatchGenreDto, PaginationDto } from '@domain/dtos';
 import { GenreEntenty, PaginationEntity } from '@domain/entities';
 import { CustomError } from '@handler-errors';
 
 export class GenreDataSourceImpl implements GenreDataSource {
-  async create({ name }: CreateGenderDto): Promise<GenreEntenty> {
+  async create({ name }: CreateGenreDto): Promise<GenreEntenty> {
     await this.checkIfNameExist(name!);
     try {
       const genre = await prisma.genre.create({ data: { name } });
@@ -14,7 +14,7 @@ export class GenreDataSourceImpl implements GenreDataSource {
       throw CustomError.internalServer(`${error}`);
     }
   }
-  async patch({ id, name }: PatchGenderDto): Promise<GenreEntenty> {
+  async patch({ id, name }: PatchGenreDto): Promise<GenreEntenty> {
     if (!name) throw CustomError.badRequest('There is nothing to modify');
     try {
       await this.findOne(id);

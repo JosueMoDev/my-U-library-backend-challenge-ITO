@@ -1,7 +1,7 @@
 import { CustomValidatorErrors } from '@handler-errors';
 import { IsNotEmpty, IsMongoId, IsOptional, IsString } from 'class-validator';
 
-export class PatchGenderDto {
+export class PatchGenreDto {
   @IsNotEmpty()
   @IsMongoId()
   public id!: string;
@@ -10,16 +10,16 @@ export class PatchGenderDto {
   @IsString()
   public name?: string;
 
-  constructor(args: PatchGenderDto) {
+  constructor(args: PatchGenreDto) {
     Object.assign(this, args);
   }
 
   static validate(
-    object: PatchGenderDto,
-  ): [undefined | string[], PatchGenderDto?] {
-    const createDto = new PatchGenderDto(object);
+    object: PatchGenreDto,
+  ): [undefined | string[], PatchGenreDto?] {
+    const createDto = new PatchGenreDto(object);
 
-    const [errors, dto] = CustomValidatorErrors.validateDto<PatchGenderDto>(createDto);
+    const [errors, dto] = CustomValidatorErrors.validateDto<PatchGenreDto>(createDto);
 
     if (errors) return [errors];
 

@@ -1,14 +1,14 @@
 import { GenreRepository } from "@domain/repositories";
 import { GenreDataSource } from "@domain/datasources";
-import { CreateGenderDto, PatchGenderDto, PaginationDto } from "@domain/dtos";
+import { CreateGenreDto, PatchGenreDto, PaginationDto } from "@domain/dtos";
 import { GenreEntenty, PaginationEntity } from "@domain/entities";
 
 export class GenreRepositoryImpl implements GenreRepository {
   constructor(private readonly datasource: GenreDataSource) {}
-  async create(dto: CreateGenderDto): Promise<GenreEntenty> {
+  async create(dto: CreateGenreDto): Promise<GenreEntenty> {
     return await this.datasource.create(dto);
   }
-  async patch(dto: PatchGenderDto): Promise<GenreEntenty> {
+  async patch(dto: PatchGenreDto): Promise<GenreEntenty> {
     return await this.datasource.patch(dto);
   }
   async changeRecordStatus(id: string): Promise<Object> {
