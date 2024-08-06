@@ -43,25 +43,26 @@ A small university library system where students can check out physical books. T
     yarn install
     ```
 
+
+
+
+3. Rename the .env.template file to .env and configure the following variables:
+
+```bash
+DATABASE_URL=
+PORT=3000
+SECRET_KEY_JWT= my secrect key here
+```
+
+Note: If you don't have a MongoDB connection string, you can use this test one:
+```bash
+DATABASE_URL=mongodb+srv://test:Su9cJtPRzvwgBOsS@cluster0.wwp35ls.mongodb.net/test
+```
 3. **Generate Prisma Client:**
 
     ```bash
     npx prisma generate
     ```
-
-# 
-4. Rename the .env.template file to .env and configure the following variables:
-
-```bash
-DATABASE_URL=
-PORT=
-SECRET_KEY_JWT=
-```
-
-Note: If you don't have a MongoDB connection string, you can use this test one:
-```bash
-  DATABASE_URL=mongodb+srv://test:Su9cJtPRzvwgBOsS@cluster0.wwp35ls.mongodb.net/test
-```
 5. **Run the seed script:**
 
     ```bash
@@ -78,7 +79,7 @@ You can log in with this user to start managing the library system right away
 6. **Run the development server:**
 
 ```bash
-    yarn dev
+yarn dev
 ```
 
 ## 🚀 Usage
