@@ -33,8 +33,8 @@ A small university library system where students can check out physical books. T
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/JosueMoDev/my-U-library-backend-challenge-ITO.git
-    cd my-U-library-backend-challenge-ITO
+    git clone https://github.com/JosueMoDev/my-university-library.git
+    cd my-university-library
     ```
 
 2. **Install dependencies:**
@@ -49,26 +49,46 @@ A small university library system where students can check out physical books. T
     npx prisma generate
     ```
 
-4. **Run the development server:**
+# 
+4. Rename the .env.template file to .env and configure the following variables:
 
-    ```bash
-    yarn dev
-    ```
+```bash
+DATABASE_URL=
+PORT=
+SECRET_KEY_JWT=
+```
 
+Note: If you don't have a MongoDB connection string, you can use this test one:
+```bash
+  DATABASE_URL=mongodb+srv://test:Su9cJtPRzvwgBOsS@cluster0.wwp35ls.mongodb.net/test
+```
 5. **Run the seed script:**
 
     ```bash
     yarn seed
     ```
+**Important**: Running the seed script is crucial as it populates the database with initial data required for the application to function correctly. This includes default users, books, and other necessary records to get started.
+ ```bash
+    {
+      "email": "adminuser@gmail.com",
+      "password": "my$otrongPass0rd"
+    }
+ ```
+You can log in with this user to start managing the library system right away
+6. **Run the development server:**
+
+```bash
+    yarn dev
+```
 
 ## 🚀 Usage
 
-- Access the API at `http://localhost:3000`
+- Access the API at [http://localhost:3000](http://localhost:3000)
 - Use the provided Postman collection to test the endpoints.
 
 ## 📜 API Documentation
 
-The API is documented using Swagger. You can access the documentation at `http://localhost:3000/api-docs`.
+The API is documented using Swagger. You can access the documentation at [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
 
 ## 📄 License
 
